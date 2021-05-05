@@ -12,14 +12,49 @@
             border-color: wheat;
             padding: 5px;
         }
-        form{
+
+
+
+        form {
             margin-bottom: 100px;
         }
-        button {
-            margin: 5px;
-        }
-        p[id*='result']{
+
+        p[id*='result'] {
             text-align: center;
+            margin: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            background-color: lemonchiffon;
+        }
+
+        td {
+            padding: 0px;
+            text-align: center;
+        }
+
+        table input {
+            border: none;
+            background-color: lemonchiffon;
+        }
+
+        table button {
+            background-color: lemonchiffon;
+            font-weight: bold;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            height: 100%;
+        }
+
+        table button:hover {
+            background-color: royalblue;
+            color: white;
+        }
+
+        td[colspan="4"] {
+            padding: 8px 10px;
         }
     </style>
 </head>
@@ -77,37 +112,93 @@
         4. 버튼으로 입력된 식을 계산하여 p태그에 출력
     </p>
     <form name="myCal4">
-        <input type="text" name="sic" placeholder="식을 입력">
-        <hr>
-        <button type="button" onclick="btNum(1)">1</button><button type="button" onclick="btNum(2)">2</button><button
-            type="button" onclick="btNum(3)">3</button><br>
-        <button type="button" onclick="btNum(4)">4</button><button type="button" onclick="btNum(5)">5</button><button
-            type="button" onclick="btNum(6)">6</button><br>
-        <button type="button" onclick="btNum(7)">7</button><button type="button" onclick="btNum(8)">8</button><button
-            type="button" onclick="btNum(9)">9</button><br>
-        <button type="button" onclick="btNum(0)">0</button><button type="button" onclick="btReset()">C</button><button
-            type="button" onclick="btDel()">&lt;-</button><br>
-        <button type="button" onclick="btNum('+')">+</button><button type="button"
-            onclick="btNum('-')">-</button><button type="button" onclick="btNum('*')">*</button><button type="button"
-            onclick="btNum('/')">/</button><br>
-        <button type="button" onclick="btCalculator()">확인</button>
-        <p id="result4">결과창4</p>
+        <table border="2px">
+            <tbody>
+                <tr>
+                    <td colspan="4">
+                        <input type="text" name="sic" placeholder="식을 입력">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <span id="result4" style="font-weight: bold;">
+                            <div style="color: gray;">result</div>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" onclick="btNum(1)">1</button>
+                    </td>
+                    <td>
+                        <button type="button" onclick="btNum(2)">2</button>
+                    </td>
+                    <td>
+                        <button type="button" onclick="btNum(3)">3</button>
+                    </td>
+                    <td>
+                        <button type="button" onclick="btNum('+')">+</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" onclick="btNum(4)">4</button>
+                    </td>
+                    <td>
+                        <button type="button" onclick="btNum(5)">5</button>
+                    </td>
+                    <td>
+                        <button type="button" onclick="btNum(6)">6</button>
+                    </td>
+                    <td>
+                        <button type="button" onclick="btNum('-')">-</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" onclick="btNum(7)">7</button>
+                    </td>
+                    <td>
+                        <button type="button" onclick="btNum(8)">8</button>
+                    </td>
+                    <td>
+                        <button type="button" onclick="btNum(9)">9</button>
+                    </td>
+                    <td>
+                        <button type="button" onclick="btNum('*')">*</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" onclick="btNum(0)">0</button>
+                    </td>
+                    <td>
+                        <button type="button" onclick="btReset()">C</button>
+                    </td>
+                    <td>
+                        <button type="button" onclick="btDel()">←</button>
+                    </td>
+                    <td>
+                        <button type="button" onclick="btNum('/')">/</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <button type="button" onclick="btCalculator()">확인</button>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
     </form>
 
     <script>
-        let inputValue = document.myCal4.sic.value;
         let result4 = document.getElementById("result4");
 
         function btNum(num) {
             document.myCal4.sic.value += num;
         }
-
-        function btCal4() {
-            let rs = document.myCal4.sic.value;
-            result4.innerHTML = (new Function('return ' + rs))();
-        }
-
-
 
         function btCalculator() {
             let formular = document.myCal4.sic.value;
@@ -127,17 +218,28 @@
                     if (opPopValue == undefined) {
                         opStack.push(char);
                     } else {
-                        if (operPriority(opPopValue, char)) {
-                            numStack.push(opPopValue);
+                        // if (operPriority(opPopValue, char)) {
+                        //     numStack.push(opPopValue);
+                        //     opStack.push(char);
+                        // } else {
+                        //     opStack.push(opPopValue);
+                        //     opStack.push(char);
+                        // }
+                        if (operPriority(char, opPopValue)) {
+                            opStack.push(opPopValue);
                             opStack.push(char);
                         } else {
-                            opStack.push(opPopValue);
+                            while (opPopValue != undefined) {
+                                numStack.push(opPopValue);
+                                opPopValue = opStack.pop();
+                            }
                             opStack.push(char);
                         }
                     }
                     value = 0;
                 }
             }
+
             numStack.push(value);
             opPopValue = opStack.pop();
             while (opPopValue != undefined) {
@@ -164,21 +266,30 @@
                         calArr.push(num2 / num1);
                     }
                 }
+                calArr.push(calArr.pop());
             }
             result4.innerHTML = calArr.pop();
         }
 
         function operPriority(op1, op2) {
-            if (op1 == "+" || op1 == "-") {
-                if (op2 == "*" || op2 == "/") {
-                    return false;
+            // if (op1 == "+" || op1 == "-") {
+            //     if (op2 == "*" || op2 == "/") {
+            //         return false;
+            //     }
+            // }
+            // return true;
+            if (op1 == "*" || op1 == "/") {
+                if (op2 == "+" || op2 == "-") {
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
+
 
         function btReset() {
             document.myCal4.sic.value = "";
+            result4.innerHTML = "<div style='color: gray;'>result</div>";
         }
 
         function btDel() {
