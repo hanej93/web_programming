@@ -218,13 +218,6 @@
                     if (opPopValue == undefined) {
                         opStack.push(char);
                     } else {
-                        // if (operPriority(opPopValue, char)) {
-                        //     numStack.push(opPopValue);
-                        //     opStack.push(char);
-                        // } else {
-                        //     opStack.push(opPopValue);
-                        //     opStack.push(char);
-                        // }
                         if (operPriority(char, opPopValue)) {
                             opStack.push(opPopValue);
                             opStack.push(char);
@@ -272,12 +265,6 @@
         }
 
         function operPriority(op1, op2) {
-            // if (op1 == "+" || op1 == "-") {
-            //     if (op2 == "*" || op2 == "/") {
-            //         return false;
-            //     }
-            // }
-            // return true;
             if (op1 == "*" || op1 == "/") {
                 if (op2 == "+" || op2 == "-") {
                     return true;
