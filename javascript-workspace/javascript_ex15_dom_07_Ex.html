@@ -29,7 +29,7 @@
     <button id="addNameAgeBt">추가</button>
     <button id="removeNameAgeBt">삭제</button>
     <hr>
-    <table>
+    <table id = 'customerTable'>
         <tr>
             <th style="width: 20%">번호</th>
             <th>이름</th>
@@ -93,7 +93,7 @@
             };
             tdAge.ondblclick = function () {
                 this.innerHTML = "<input type='text' id='modAge' placeholder='수정할 나이을 입력하세요'>";
-                var inputAge = this;
+                var inputAge = this; // td 객체의 this
 
                 var modAge = document.querySelector("#modAge");
                 modAge.addEventListener('keydown', function () {
@@ -125,10 +125,11 @@
         delBt.addEventListener("click", function () {
             var name = document.querySelector("#name").value;
             console.log(name);
-
+            console.log(document.querySelectorAll("tr"));
+            console.log(document.querySelectorAll("#customerTable tr"));
             for (let i = 1; i < document.querySelectorAll("tr").length; i++) {
-                if (document.querySelectorAll("tr")[i].children[1].innerText == name) {
-                    document.querySelectorAll("tr")[i].parentNode.removeChild(document.querySelectorAll("tr")[
+                if (document.querySelectorAll("#customerTable tr")[i].children[1].innerText == name) {
+                    document.querySelectorAll("#customerTable tr")[i].parentNode.removeChild(document.querySelectorAll("tr")[
                         i]);
 
                 }
