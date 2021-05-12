@@ -25,7 +25,7 @@
         th{
             background-color: gray;
         }
-       
+
         tr:last-child{
             font-weight: bold;
             font-size: 110%;
@@ -37,7 +37,7 @@
                 var checkBox = $(this);
 
                 var result = $("#result");
-                var optionPrice = $(this).parent().prev();
+                var optionPrice = checkBox.parent().prev();
 
                 if(checkBox.prop("checked")){
                     result.text(Number(result.text()) + Number(optionPrice.text()));

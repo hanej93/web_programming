@@ -7,7 +7,7 @@
     <script src="../jquery-3.6.0.js"></script>
 
     <style>
-        table {
+        /* table {
             border: 1px solid black;
             border-collapse: collapse;
             position: relative;
@@ -22,7 +22,7 @@
 
         td {
             border: 1px solid black;
-        }
+        } */
     </style>
 
     <script>
@@ -55,7 +55,24 @@
                     }
                     table.append(tr);
                 }
+                
+                $("table").css({
+                    "border": "1px solid black",
+                    "border-collapse": "collapse",
+                    "position": "relative",
+                    "left": "50%",
+                    "transform": "translateX(-50%)"
+                });
+                $("th").css({
+                    "background-color": "gray",
+                    "border": "1px solid black"
+                });
+                $("td").css({
+                    "border": "1px solid black"
+                });
             });
+
+
         });
     </script>
 </head>
