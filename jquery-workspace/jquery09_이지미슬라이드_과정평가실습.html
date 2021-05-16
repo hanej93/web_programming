@@ -70,8 +70,6 @@
                 });
             });
             $("img[src*=btn]").first().click(function(){
-                // $("div#imgFrame>ul").css("margin-left","-400px");
-                // $("div#imgFrame>ul").prepend($("div#imgFrame>ul").children().eq(4));
                 $("div#imgFrame>ul").animate({"margin-left":"0px"},500,function(){
                     $("div#imgFrame>ul").prepend($("div#imgFrame>ul").children().eq(4));
                     $("div#imgFrame>ul").css("margin-left","-400px");
@@ -103,5 +101,4 @@
         </div>
     </div>
 </body>
-
 </html>
